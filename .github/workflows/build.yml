@@ -21,12 +21,6 @@ jobs:
       - name: install tree-sitter
         run: cargo install tree-sitter-cli
 
-      - name: verify cargo in in path
-        run: echo $PATH
-
-      - name: check tree-sitter is in cargo/bin
-        run: ls -la $USER/.local/share/cargo/bin
-
       - name: versions
         run: |
           nasm --version
