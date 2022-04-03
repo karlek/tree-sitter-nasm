@@ -1,0 +1,24 @@
+name: Compile
+
+on:
+  push:
+      branches: [ main ]
+  pull_request:
+      branches: [ main ]
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+
+      - name: install dependencies
+        run: sudo apt install -y nasm tree-sitter
+
+      - name: versions
+        run: |
+          nasm --version
+          tree-sitter --version
+
+      - name: run test
+        run: CC=clang test
