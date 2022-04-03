@@ -1,7 +1,10 @@
 .PHONY: test
 
-test: binding.gyp
-	@tree-sitter parse example-file
+test: | src
+	@tree-sitter test
 
-binding.gyp:
-	tree-sitter generate
+parse: | src
+	@tree-sitter parse $(asm)
+
+src:
+	tree-sitter generate --no-bindings
