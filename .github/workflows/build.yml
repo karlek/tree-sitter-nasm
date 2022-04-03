@@ -1,0 +1,30 @@
+name: Compile
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+
+        # NOTE: tree-sitter package is available in ubuntu 22.04
+        # which is not an available ci-image. So until then
+        # we use cargo to install tree-sitter.
+      - name: install dependencies
+        run: sudo apt install -y nasm cargo
+
+      - name: install tree-sitter
+        run: cargo install tree-sitter-cli
+
+      - name: versions
+        run: |
+          nasm --version
+          tree-sitter --version
+
+      - name: run test
+        run: make test
