@@ -7,7 +7,10 @@ add al, 9
 ---
 
 (source_file
-	(source_line
-	 (instruction
-	 (add)))
+ (source_line
+  (instruction
+   (add
+	(reg)
+	(imm (imm8))
+   )))
  )
