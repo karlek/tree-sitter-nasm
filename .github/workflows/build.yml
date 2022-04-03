@@ -27,4 +27,4 @@ jobs:
           tree-sitter --version
 
       - name: run test
-        run: CC=clang test
+        run: make test
