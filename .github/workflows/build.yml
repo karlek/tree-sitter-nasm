@@ -8,12 +8,24 @@ on:
 
 jobs:
   build:
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-20.04
       steps:
       - uses: actions/checkout@v3
 
+        # NOTE: tree-sitter package is available in ubuntu 22.04
+        # which is not an available ci-image. So until then
+        # we use cargo to install tree-sitter.
       - name: install dependencies
-        run: sudo apt install -y nasm tree-sitter
+        run: sudo apt install -y nasm cargo
+
+      - name: install tree-sitter
+        run: cargo install tree-sitter-cli
+
+      - name: verify cargo in in path
+        run: echo $PATH
+
+      - name: check tree-sitter is in cargo/bin
+        run: ls -la $USER/.local/share/cargo/bin
 
       - name: versions
         run: |
